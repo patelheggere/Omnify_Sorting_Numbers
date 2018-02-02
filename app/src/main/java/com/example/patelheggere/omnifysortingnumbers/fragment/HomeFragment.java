@@ -89,15 +89,7 @@ public class HomeFragment extends Fragment {
         btnSort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putIntArray("Arrays", randomNumbers);
-                SortingFragment sortingFragment = new SortingFragment();
-                sortingFragment.setArguments(bundle);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.container, sortingFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+              callSortingFragment();
             }
         });
         btnGenerate.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +102,7 @@ public class HomeFragment extends Fragment {
 
     private void generateNumbers()
     {
-        strNumbers = "Random Numbers \n \t \t";
+        strNumbers = getString(R.string.random_num)+" \n \t \t";
         for (int i=0; i<20 ;i++)
         {
             Random r = new Random();
@@ -120,6 +112,19 @@ public class HomeFragment extends Fragment {
             strNumbers+=randomNumbers[i]+"\n \t \t";
         }
         tvNumbers.setText(strNumbers);
+    }
+
+    private void callSortingFragment()
+    {
+        Bundle bundle = new Bundle();
+        bundle.putIntArray("Arrays", randomNumbers);
+        SortingFragment sortingFragment = new SortingFragment();
+        sortingFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container, sortingFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

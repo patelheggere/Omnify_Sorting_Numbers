@@ -99,8 +99,8 @@ public class SortingFragment extends Fragment {
             SortingService.MyBinder mBinder = (SortingService.MyBinder)iBinder;
             mService = mBinder.getService();
             mBound = true;
-            strMerge = "Merge Sort \n \t\t";
-            strQuick = "Quick Sort \n \t\t";
+            strMerge = getString(R.string.merge_sort)+" \n \t\t";
+            strQuick = getString(R.string.quick_sort)+" \n \t\t";
             mMerge = mService.MergeSort(randomNumbers);
             for (int i = 0; i < mMerge.length; i++)
                 strMerge+=mMerge[i]+"\n \t\t";

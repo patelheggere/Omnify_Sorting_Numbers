@@ -16,7 +16,6 @@ public class SortingService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        System.out.println("calling service");
         return mBinder;
     }
 
@@ -44,11 +43,8 @@ public class SortingService extends Service {
     {
         if (lowerIndex < higherIndex) {
             int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
-            // Below step sorts the left side of the array
             doMergeSort(lowerIndex, middle);
-            // Below step sorts the right side of the array
             doMergeSort(middle + 1, higherIndex);
-            // Now merge both sides
             mergeParts(lowerIndex, middle, higherIndex);
         }
     }
@@ -83,16 +79,8 @@ public class SortingService extends Service {
 
         int i = lowerIndex;
         int j = higherIndex;
-        // calculate pivot number, I am taking pivot as middle index number
         int pivot = array[lowerIndex+(higherIndex-lowerIndex)/2];
-        // Divide into two arrays
         while (i <= j) {
-            /**
-             * In each iteration, we will identify a number from left side which
-             * is greater then the pivot value, and also we will identify a number
-             * from right side which is less then the pivot value. Once the search
-             * is done, then we exchange both numbers.
-             */
             while (array[i] < pivot) {
                 i++;
             }
@@ -101,12 +89,10 @@ public class SortingService extends Service {
             }
             if (i <= j) {
                 exchangeNumbers(i, j);
-                //move index to next position on both sides
                 i++;
                 j--;
             }
         }
-        // call quickSort() method recursively
         if (lowerIndex < j)
             quickSort(lowerIndex, j);
         if (i < higherIndex)
